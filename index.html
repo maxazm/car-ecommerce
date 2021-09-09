@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrapの読み込み -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <!-- fontawesome -->
+    <link href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <title>Car Ecommerce</title>
+</head>
+
+<body>
+
+    <div class="container-fluid mt-5" id="app">
+        <div class="d-flex">
+            <brand-selection></brand-selection>
+            <sort-option></sort-option>
+        </div>
+        <car-information></car-information>
+
+
+    </div>
+
+    <!-- template集 -->
+    <script type="text/x-template" id="brand-selection">
+        <div class="mx-2">
+            <select class="form-select" aria-label="Default select example" @change="getSelectedBrand()" >
+                <option v-for="(brand,index) in carBrandCategory" :value="index">{{brand}}</option>
+            </select>
+        </div>
+    </script>
+
+    <script type="text/x-template" id="sort-option">
+        <div>
+            <select class="form-select" aria-label="Default select example" @change="sortSignal($event)">
+                <option v-for="(option, index) in sortOptions" :value="index">{{option}}</option>
+            </select>
+        </div>
+    </script>
+
+    <script type="text/x-template" id="car-collection">
+        <div class="d-flex flex-wrap pt-4">
+            <div class="card-body m-2" v-for="(car, index) in carCollection" style="max-width: 330px;" :value="car.brand" >
+                <img :src=car.imgUrl class="card-img-top" alt="...">
+                <h5 class="card-title pt-2">{{car.name}}</h5>
+                <p class="card-text">Category: {{car.category}}</p>
+                <p class="card-text">Price: {{car.priceString}}</p>
+                <p class="card-text">Date: {{car.date}}</p>  
+            </div>
+        </div>
+    </script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
+
